@@ -1,0 +1,48 @@
+html {
+    min-height: 100%;
+   background-image: url("./images/mcg.jpg"); 
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+   position:relative;
+   color: black;
+   font-family: sans-serif;
+}
+
+.signCard {
+    background: rgba(226, 123, 13, 0.7);
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height:300px;
+    width: 300px;
+    transform: translate(-50%, -50%);
+    padding: 0 10px 5px;
+    text-align: center;
+}
+
+.signUp{
+    margin-top: 50px;
+}
+
+.userForm{
+   font-size: 1.5em;
+}
+
+#userName {
+  margin: 10px 0;
+  padding: 5px 10px;
+}
+
+#teamList{
+    padding:5px;
+}
+
+#submitButton {
+    background-color: black;
+    color:white;
+    padding: 10px;
+    margin-top: 10px;
+
+}
