@@ -36,3 +36,4 @@ function saveData(event){
     var local = localStorage.setItem(localIndex, JSON.stringify(userData));
     window.location.href = 'mainPage.html'
 }
+
