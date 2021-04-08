@@ -1,4 +1,10 @@
-html {
+* {
+    padding: 0;
+    margin: 0;
+}
+
+// Signup page
+#signUpPage {
     min-height: 100%;
    background-image: url("./images/mcg.jpg"); 
    background-size: cover;
@@ -45,4 +51,83 @@ html {
     padding: 10px;
     margin-top: 10px;
 
+//mainPage
+
+body {
+    background: linear-gradient(rgb(0, 0, 0), rgb(255, 0, 0));
 }
+
+header {
+    display: flex;
+    background-color: rgb(255, 0, 0);
+}
+
+#name{
+    padding: 5px;
+    margin: 10px;
+    background-color: rgba(0, 0, 0, 0.274);
+}
+#navbar{
+    display: flex;
+    padding: 5px;
+    margin: 5px;
+    width: 100%;
+
+}
+#navbar > h1 {
+    padding: 5px;
+    margin: 2px;
+    background-color: rgba(0, 0, 0, 0.219);
+}
+
+table {
+    margin: 50px;
+    width: 90%;
+    height: 700px;
+    background-color: rgba(255, 255, 255, 0.527);
+    border-radius: 5px;
+}
+td {
+    background-color: rgba(0, 0, 0, 0.521);
+    color: white;
+    text-align: center;
+}
+
+.days {
+    border: thin solid black;
+    background-color: rgba(255, 0, 0, 0.486);
+}
+
+#information {
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+}
+
+#info{
+    margin: 30px;
+    width: 100%;
+    display: flex;
+}
+#rules {
+    width: 30%;
+    height: fit-content;
+    padding: 5px;
+    margin:5px;
+    border: thin groove black;
+    border-radius: 5px;
+}
+#teamStats {
+    width: 30%;
+    padding: 5px;
+    margin: 5px;
+    border: thin groove black;
+    border-radius: 5px;
+}
+#news {
+    width: 30%;
+    padding: 5px;
+    margin: 5px;
+    border: thin groove black;
+    border-radius: 5px;
+  }
