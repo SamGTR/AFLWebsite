@@ -56,7 +56,7 @@ function getGames () {
 
             // fetch first five days to display
             for(var i= 0; i< 5; i++){
-                document.querySelector("#day"+(i+1)).innerHTML = matchDates[i];
+                document.querySelector("#day"+(i+1)).innerHTML = matchDates[i]+"<br>"+moment(matchDates[i]).format("dddd");
                 document.querySelector("#tickets").children[i+1].children[0].setAttribute('href','https://www.ticketmaster.com.au/browse/afl-catid-711/sports-rid-10004?datestart='+matchDates[i]);
                 var matchesEl = document.querySelector("#matches").children[i+1];
                 var teamEl;
