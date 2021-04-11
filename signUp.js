@@ -2,7 +2,6 @@ var selectEl = document.querySelector("#teamList")
 var submitEl = document.querySelector("#submitButton");
 var inputEl = document.querySelector("#userName");
 var selectEl = document.querySelector("#teamList");
-var localIndex=0; 
   
 var requestUrl = 'https://api.squiggle.com.au/?q=teams';
     
@@ -29,10 +28,7 @@ submitEl.addEventListener("click", saveData);
 
 function saveData(event){
     event.preventDefault();
-    var userData = {user:"", team:""};
-    userData.user = inputEl.value;
-    userData.team = selectEl.value;
-    console.log(userData);
-    var local = localStorage.setItem(localIndex, JSON.stringify(userData));
+    localStorage.setItem("user", inputEl.value);
+    localStorage.setItem("team", selectEl.value);
     window.location.href = 'mainPage.html'
 }

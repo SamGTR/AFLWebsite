@@ -3,56 +3,68 @@
     padding: 0;
     margin: 0;
 }
-
+/* 
 body {
-    background: linear-gradient(rgb(0, 0, 0), rgb(255, 0, 0));
+   background: linear-gradient(black, rgb(255, 0, 0));
 }
-
+*/
 header {
     display: flex;
-    background-color: rgb(255, 0, 0);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-bottom: thick solid rgba(0, 0, 0, 0.5);
 }
 
 #name{
     padding: 5px;
     margin: 10px;
-    background-color: rgba(0, 0, 0, 0.274);
+    min-width: fit-content;
+    border-radius: 5px;
 }
 #navbar{
     display: flex;
+    justify-content: flex-end;
     padding: 5px;
     margin: 5px;
     width: 100%;
-
 }
 #navbar > h1 {
     padding: 5px;
     margin: 2px;
-    background-color: rgba(0, 0, 0, 0.219);
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 5px;
 }
 
 table {
+    padding: 20px;
     margin: 50px;
     width: 90%;
     height: 700px;
-    background-color: rgba(255, 255, 255, 0.527);
+    background-color: rgba(255, 255, 255, 0.4);
     border-radius: 5px;
 }
 td {
-    background-color: rgba(0, 0, 0, 0.521);
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
     color: white;
     text-align: center;
 }
 
+.firstColumn{
+    background-color: rgba(0, 0, 0, 0.2);
+}
 .days {
     border: thin solid black;
-    background-color: rgba(255, 0, 0, 0.486);
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 62px;
 }
 
 #information {
     text-align: center;
     padding: 5px;
     margin: 5px;
+    color: white;
+    font-size: 40px;
 }
 
 #info{
@@ -67,5 +79,5 @@ td {
     margin:5px;
     border: thin groove black;
     border-radius: 5px;
-    background-color: gray;
+    background-color: rgba(255, 255, 255, 0.5);
 }
