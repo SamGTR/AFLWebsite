@@ -1,34 +1,31 @@
-var selectEl = document.querySelector("#teamList")
+var selectEl = document.querySelector("#teamList");
 var submitEl = document.querySelector("#submitButton");
 var inputEl = document.querySelector("#userName");
 var selectEl = document.querySelector("#teamList");
-  
-var requestUrl = 'https://api.squiggle.com.au/?q=teams';
-    
+
+var requestUrl = "https://api.squiggle.com.au/?q=teams";
+
 fetch(requestUrl)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        console.log(data)
-        for (var i = 0; i < data.teams.length; i++) {
-              
-            var createOption = document.createElement('option');      
-                    
-            createOption.textContent = data.teams[i].name;
-            createOption.value = data.teams[i].name;
-                            
-            selectEl.appendChild(createOption);
-               
-            }
-    });
- 
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+    for (var i = 0; i < data.teams.length; i++) {
+      var createOption = document.createElement("option");
 
-submitEl.addEventListener("click", saveData);     
+      createOption.textContent = data.teams[i].name;
+      createOption.value = data.teams[i].name;
 
-function saveData(event){
-    event.preventDefault();
-    localStorage.setItem("user", inputEl.value);
-    localStorage.setItem("team", selectEl.value);
-    window.location.href = 'mainPage.html'
+      selectEl.appendChild(createOption);
+    }
+  });
+
+submitEl.addEventListener("click", saveData);
+
+function saveData(event) {
+  event.preventDefault();
+  localStorage.setItem("user", inputEl.value);
+  localStorage.setItem("team", selectEl.value);
+  window.location.href = "mainPage.html";
 }
