@@ -78,3 +78,33 @@ function getGames () {
 
 getGames();
 
+var statsDiv = document.querySelector("#stats");
+var statsUrl = 'https://api.squiggle.com.au/?q=standings';
+
+function teamStats(chosenTeam) { 
+    fetch(statsUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+        
+            for (var i= 0; i<data.standings.length; i++){
+                    if ( data.standings[i].name == chosenTeam){
+
+                        var createHEl = document.createElement('h3'); 
+                        createHEl.innerHTML=(chosenTeam);
+                        statsDiv.append(createHEl);
+                        var createPEl = document.createElement('p');        
+                        createPEl.innerHTML = ("<br> Rank: "+data.standings[i].rank+"<br> Points: "+data.standings[i].pts
+                        +"<br> Wins: "+data.standings[i].wins+"<br> Losses: "+data.standings[i].losses
+                        +"<br> Goals: "+data.standings[i].goals_for+"<br> Behinds: "+data.standings[i].behinds_for
+                        +"<br> Goals Against: "+data.standings[i].goals_against+"<br> Behinds Against: "
+                        +data.standings[i].behinds_against);
+                        statsDiv.append(createPEl);
+                    }
+            }    
+        });
+}
+
+teamStats(userTeam);
+
