@@ -2,12 +2,12 @@
 const username = localStorage.getItem('user');
 const userTeam = localStorage.getItem('team')
 const nameEl = document.getElementById("name")
-const teamColors = ["red, gold, black", "blue, gold, maroon", "White, Navy, Navy", "White, Black", "Red, Black", "Purple, White", "White, Navy", "Blue, Gold, Red", "White, #36454f, Orange", "Gold, Brown", "Red, Navy", "White, Blue", "Silver, White, Teal, Black", "Gold, Black", "White, Red, Black", "Red, White", "Royalblue, Gold", "Blue, Red, White"]
+const teamColors = ["red, gold, black", "blue, gold, maroon", "White, Navy, Navy", "White, Black", "Red, Black", "White, Purple", "White, Navy", "Blue, Gold, Red", "White, #36454f, Orange", "Gold, Brown", "Red, Navy", "White, Blue", "Black, Silver, White, Teal", "Gold, Black", "White, Red, Black", "White, Red", "Royalblue, Gold", "Blue, Red, White"]
 const teamLi = ["Adelaide", "Brisbane Lions", "Carlton", "Collingwood", "Essendon", "Fremantle", "Geelong", "Gold Coast", "Greater Western Sydney", "Hawthorn", "Melbourne", "North Melbourne", "Port Adelaide", "Richmond", "St Kilda", "Sydney", "West Coast", "Western Bulldogs"]
 
 
 function printName() {
-    nameEl.innerHTML = "User: " + username
+    nameEl.innerHTML = "Hello, " + username.charAt(0).toUpperCase() + username.slice(1);
 }
 printName();
 
@@ -15,6 +15,12 @@ function setbkgColor(chosenTeam) {
     var team = teamLi.indexOf(chosenTeam);
     var colorGradient = teamColors[team];
     document.body.style.backgroundImage = "linear-gradient(" + colorGradient + ")";
+    document.querySelector("header").style.color= colorGradient.split(",")[1];
+    document.querySelectorAll("a").forEach(function(item){
+          item.style.color= colorGradient.split(",")[1];
+    })
+    
+    
 }
 setbkgColor(userTeam);
 
@@ -31,7 +37,7 @@ function getGames () {
     .then(function (response) {
       if (response.ok) { 
           response.json().then(function (data) {
-          console.log(data);
+         // console.log(data);
             
            var l;
             for(var i=0; i<20 ; i++){
@@ -53,19 +59,27 @@ function getGames () {
                     }
                 }
             }
-
+            var m1 = '<div id="myModal';
+            var m2 = '"class="modal"><div class="modal-content"><div class="modal-header"><span class="close">×</span><h2>'
+            var m3= '</h2></div><div class="modal-body"><p>'
+            var m4 = '</p></div></div></div>';
+           
+            
+        //    document.getElementById("p2").style.color = "blue";
             // fetch first five days to display
             for(var i= 0; i< 5; i++){
-                document.querySelector("#day"+(i+1)).innerHTML = matchDates[i];
+                document.querySelector("#day"+(i+1)).innerHTML = matchDates[i]+"<br>"+moment(matchDates[i]).format("dddd");
                 document.querySelector("#tickets").children[i+1].children[0].setAttribute('href','https://www.ticketmaster.com.au/browse/afl-catid-711/sports-rid-10004?datestart='+matchDates[i]);
                 var matchesEl = document.querySelector("#matches").children[i+1];
                 var teamEl;
-                matchInfo[matchDates[i]].forEach(function(item){
+                matchInfo[matchDates[i]].forEach(function(item,index){
+                    var modalFinal = m1+i+index+m2+ data.games[item].ateam+" V/S "+data.games[item].hteam+m3+"Venue: "+data.games[item].venue+"<br><br>Match Time: "+data.games[item].localtime+m4; 
                     teamEl = document.createElement("p");
-                    teamEl.innerHTML = data.games[item].ateam+"<br> V/S <br>"+data.games[item].hteam+"<br><br>";
+                    teamEl.innerHTML = '<button class="myBtn"  background-color: transparent id="'+i+index+'">'+data.games[item].ateam+"<br> V/S <br>"+data.games[item].hteam+'</button>'+modalFinal+'<br><br>' ;
                     matchesEl.append(teamEl);
                 })
             }
+      //      document.querySelectorAll(".modal-header").style.color = "black";
         });
       } else {
         alert('Error: ' + response.statusText);
@@ -77,6 +91,28 @@ function getGames () {
 };
 
 getGames();
+
+
+function modalFuntion(event){
+  event.preventDefault();
+  var modalSelectedEl = event.target;
+ 
+  if(modalSelectedEl.matches("button") && modalSelectedEl.classList.contains("myBtn"))
+  {  
+    var modalEl = document.getElementById("myModal"+modalSelectedEl.id);
+    var teamColor = teamColors[teamLi.indexOf(userTeam)];
+    teamColor = teamColor.split(",");
+    modalEl.children[0].children[0].style.color = teamColor[0] ;
+    modalEl.children[0].children[0].style.backgroundColor = teamColor[1] ;
+    modalEl.style.display = "block";
+  }
+  else if(modalSelectedEl.matches("span") && modalSelectedEl.classList.contains("close"))
+  { 
+      modalSelectedEl.parentElement.parentElement.parentElement.style.display = "none";
+  }
+}
+
+document.querySelector("#matches").addEventListener("click", modalFuntion);
 
 var statsDiv = document.querySelector("#stats");
 var statsUrl = 'https://api.squiggle.com.au/?q=standings';
@@ -107,4 +143,5 @@ function teamStats(chosenTeam) {
 }
 
 teamStats(userTeam);
+
 
