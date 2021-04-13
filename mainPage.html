@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AFL Website</title>
     <link rel="stylesheet" href="mainPage.css" />
+    <style>
+      body {font-family: Arial, Helvetica, sans-serif;}
+      
+      </style>
   </head>
   <body>
     <header>
-      <h1 id="name">Name:</h1>
+      <h1 id="name">Hello</h1>
       <div id="navbar">
-        <h1>Tickets</h1>
-        <h1>Weather</h1>
-        <h1>Rules</h1>
-        <h1>Team stats</h1>
-        <h1>News</h1>
-        <h1>Settings</h1>
+        <h1><a href="#tickets" style="text-decoration: none;">Tickets</a></h1>
+        <h1><a href="#weather" style="text-decoration: none;">Weather</a></h1>
+        <h1><a href="#rules" style="text-decoration: none;">Rules</a></h1>
+        <h1><a href="#teamStats" style="text-decoration: none;">Team stats</a></h1>
+        <h1><a href="https://www.afl.com.au/news" target="_blank" style="text-decoration: none;">News</a></h1>
+        <h1><a href="signup.html" style="text-decoration: none;">Settings</a></h1>
       </div>
-    </header>
+    </header>  
     <table>
       <tr>
         <th></th>
@@ -41,7 +45,7 @@
         <td id="day4Matches"></td>
         <td id="day5Matches"></td>
       </tr>
-      <tr>
+      <tr id="weather">
         <th class="firstColumn">Weather</th>
         <td id="day1Weather"></td>
         <td id="day2Weather"></td>
