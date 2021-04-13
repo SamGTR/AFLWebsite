@@ -21,6 +21,12 @@
     <table>
       <tr>
         <th></th>
+        <th class="round">&#60;</th>
+        <th colspan="3" class="round" id="round">Round</th>
+        <th class="round">&#62;</th>
+      </tr>
+      <tr>
+        <th></th>
         <th class="days" id="day1">Day1</th>
         <th class="days" id="day2">Day2</th>
         <th class="days" id="day3">Day3</th>
@@ -28,7 +34,7 @@
         <th class="days" id="day5">Day5</th>
       </tr>
       <tr id="matches">
-        <th>Matches</th>
+        <th class="firstColumn">Matches</th>
         <td id="day1Matches"></td>
         <td id="day2Matches"></td>
         <td id="day3Matches"></td>
@@ -44,12 +50,12 @@
         <td id="day5Weather"></td>
       </tr>
       <tr id="tickets">
-        <th >Tickets</th>
-        <td id="day1Tickets" href=""><a href="" target="_blank">Tickets</a></td>
-        <td id="day2Tickets" href=""><a href="" target="_blank">Tickets</a></td>
-        <td id="day3Tickets" href=""><a href="" target="_blank">Tickets</a></td>
-        <td id="day4Tickets" href=""><a href="" target="_blank">Tickets</a></td>
-        <td id="day5Tickets" href=""><a href="" target="_blank">Tickets</a></td>
+        <th class="firstColumn">Tickets</th>
+        <td id="day1Tickets" href=""><a class="tickets" href="" target="_blank">Tickets</a></td>
+        <td id="day2Tickets" href=""><a class="tickets" href="" target="_blank">Tickets</a></td>
+        <td id="day3Tickets" href=""><a class="tickets" href="" target="_blank">Tickets</a></td>
+        <td id="day4Tickets" href=""><a class="tickets" href="" target="_blank">Tickets</a></td>
+        <td id="day5Tickets" href=""><a   class="tickets" href="" target="_blank">Tickets</a></td>
       </tr>
     </table>
     <h1 id="information">Information</h1>
@@ -115,10 +121,9 @@
         </div>
       </div>
 
-      <div class="bubbles" id="news">
-        <h2>News</h2>
-        <h3 id="newsTitle">Title</h3>
-        <p id="newsDesc">Description</p>
+      <div class="bubbles" id="song">
+        <h2>Team Song</h2>
+        <iframe id="embededSong" width="100%" height="300" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

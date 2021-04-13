@@ -4,6 +4,8 @@ const userTeam = localStorage.getItem('team')
 const nameEl = document.getElementById("name")
 const teamColors = ["red, gold, black", "blue, gold, maroon", "White, Navy, Navy", "White, Black", "Red, Black", "Purple, White", "White, Navy", "Blue, Gold, Red", "White, #36454f, Orange", "Gold, Brown", "Red, Navy", "White, Blue", "Silver, White, Teal, Black", "Gold, Black", "White, Red, Black", "Red, White", "Royalblue, Gold", "Blue, Red, White"]
 const teamLi = ["Adelaide", "Brisbane Lions", "Carlton", "Collingwood", "Essendon", "Fremantle", "Geelong", "Gold Coast", "Greater Western Sydney", "Hawthorn", "Melbourne", "North Melbourne", "Port Adelaide", "Richmond", "St Kilda", "Sydney", "West Coast", "Western Bulldogs"]
+const teamSong = ["https://www.youtube.com/embed/subHCYCimYs","https://www.youtube.com/embed/kYwW41-IoEE", "https://www.youtube.com/embed/WXhA94oAdMw", "https://www.youtube.com/embed/HG2z3fkVqpQ", "https://www.youtube.com/embed/KybYJ8Xk-HI", "https://www.youtube.com/embed/v-ywQLOfvMY", "https://www.youtube.com/embed/X9rKF_0lP18", "https://www.youtube.com/embed/Ksp9r-Qp0yQ", "https://www.youtube.com/embed/WutWcBLvgxQ", "https://www.youtube.com/embed/LsKI78uRH_g", "https://www.youtube.com/embed/Ab_Rdr0pfN0", "https://www.youtube.com/embed/KeULcS2T46A", "https://www.youtube.com/embed/FiJXTm14Ses", "https://www.youtube.com/embed/luin9bYgkks", "https://www.youtube.com/embed/oe8fvtPMUTw", "https://www.youtube.com/embed/gNItReTUaso", "https://www.youtube.com/embed/jcwpwZowHxo", "https://www.youtube.com/embed/WE-jKx8NnG8"]
+
 
 
 function printName() {
@@ -15,6 +17,7 @@ function setbkgColor(chosenTeam) {
     var team = teamLi.indexOf(chosenTeam);
     var colorGradient = teamColors[team];
     document.body.style.backgroundImage = "linear-gradient(" + colorGradient + ")";
+    document.getElementById("embededSong").src = teamSong[team];
 }
 setbkgColor(userTeam);
 
