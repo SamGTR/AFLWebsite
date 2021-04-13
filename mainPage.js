@@ -4,6 +4,8 @@ const userTeam = localStorage.getItem('team')
 const nameEl = document.getElementById("name")
 const teamColors = ["red, gold, black", "blue, gold, maroon", "White, Navy, Navy", "White, Black", "Red, Black", "White, Purple", "White, Navy", "Blue, Gold, Red", "White, #36454f, Orange", "Gold, Brown", "Red, Navy", "White, Blue", "Black, Silver, White, Teal", "Gold, Black", "White, Red, Black", "White, Red", "Royalblue, Gold", "Blue, Red, White"]
 const teamLi = ["Adelaide", "Brisbane Lions", "Carlton", "Collingwood", "Essendon", "Fremantle", "Geelong", "Gold Coast", "Greater Western Sydney", "Hawthorn", "Melbourne", "North Melbourne", "Port Adelaide", "Richmond", "St Kilda", "Sydney", "West Coast", "Western Bulldogs"]
+const teamSong = ["https://www.youtube.com/embed/subHCYCimYs","https://www.youtube.com/embed/kYwW41-IoEE", "https://www.youtube.com/embed/WXhA94oAdMw", "https://www.youtube.com/embed/HG2z3fkVqpQ", "https://www.youtube.com/embed/KybYJ8Xk-HI", "https://www.youtube.com/embed/v-ywQLOfvMY", "https://www.youtube.com/embed/X9rKF_0lP18", "https://www.youtube.com/embed/Ksp9r-Qp0yQ", "https://www.youtube.com/embed/WutWcBLvgxQ", "https://www.youtube.com/embed/LsKI78uRH_g", "https://www.youtube.com/embed/Ab_Rdr0pfN0", "https://www.youtube.com/embed/KeULcS2T46A", "https://www.youtube.com/embed/FiJXTm14Ses", "https://www.youtube.com/embed/luin9bYgkks", "https://www.youtube.com/embed/oe8fvtPMUTw", "https://www.youtube.com/embed/gNItReTUaso", "https://www.youtube.com/embed/jcwpwZowHxo", "https://www.youtube.com/embed/WE-jKx8NnG8"]
+
 
 
 function printName() {
@@ -11,10 +13,15 @@ function printName() {
 }
 printName();
 
-function setbkgColor(chosenTeam) {
+// Dynamic sytling
+function setStyling(chosenTeam) {
+    // background
     var team = teamLi.indexOf(chosenTeam);
     var colorGradient = teamColors[team];
     document.body.style.backgroundImage = "linear-gradient(" + colorGradient + ")";
+    // team song
+    document.getElementById("embededSong").src = teamSong[team];
+    // header
     document.querySelector("header").style.color= colorGradient.split(",")[1];
     document.querySelectorAll("a").forEach(function(item){
           item.style.color= colorGradient.split(",")[1];
@@ -22,7 +29,7 @@ function setbkgColor(chosenTeam) {
     
     
 }
-setbkgColor(userTeam);
+setStyling(userTeam);
 
 
 var gamesDays = 0;
@@ -30,14 +37,14 @@ var dateOfMatch;
 var matchDates = [];
 var matchInfo = {};
 
-function getGames () {
+function getGames (chosenDate) {
   var apiUrl = 'https://api.squiggle.com.au/?q=games;year=2021;source=1;complete=0';
 
   fetch(apiUrl)
     .then(function (response) {
       if (response.ok) { 
           response.json().then(function (data) {
-         // console.log(data);
+          console.log(data);
             
            var l;
             for(var i=0; i<20 ; i++){
@@ -79,6 +86,9 @@ function getGames () {
                     matchesEl.append(teamEl);
                 })
             }
+            // display date at top of table
+            document.querySelector('#round').innerHTML = moment(matchDates[0]).format("D/M/YY") + " - " + moment(matchDates[4]).format("D/M/YY");
+            
       //      document.querySelectorAll(".modal-header").style.color = "black";
         });
       } else {
@@ -90,7 +100,21 @@ function getGames () {
     });
 };
 
-getGames();
+getGames(0);
+
+var x = 0
+function changeDate(direction){
+    if (direction === 'right') {
+        var y = x + 5
+        x = y
+        getGames(y)
+    }
+    if (direction === 'left') {
+        var y = x - 5
+        x = y
+        getGames(y)
+    }
+}
 
 
 function modalFuntion(event){
