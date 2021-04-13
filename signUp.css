@@ -11,6 +11,13 @@ html {
    font-family: sans-serif;
 }
 
+.logo{
+    display:block;
+    width:20%;
+    height:20%;
+    margin-left: auto;
+    margin-right: auto;
+}
 .signCard {
     background: rgba(226, 123, 13, 0.7);
     border-radius: 10px;
