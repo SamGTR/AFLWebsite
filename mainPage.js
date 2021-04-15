@@ -5,7 +5,8 @@ const nameEl = document.getElementById("name")
 const teamColors = ["red, gold, black", "blue, gold, maroon", "White, Navy, Navy", "White, Black", "Red, Black", "White, Purple", "White, Navy", "Blue, Gold, Red", "White, #36454f, Orange", "Gold, Brown", "Red, Navy", "White, Blue", "Black, Silver, White, Teal", "Gold, Black", "White, Red, Black", "White, Red", "Royalblue, Gold", "Blue, Red, White"]
 const teamLi = ["Adelaide", "Brisbane Lions", "Carlton", "Collingwood", "Essendon", "Fremantle", "Geelong", "Gold Coast", "Greater Western Sydney", "Hawthorn", "Melbourne", "North Melbourne", "Port Adelaide", "Richmond", "St Kilda", "Sydney", "West Coast", "Western Bulldogs"]
 const teamSong = ["https://www.youtube.com/embed/subHCYCimYs","https://www.youtube.com/embed/kYwW41-IoEE", "https://www.youtube.com/embed/WXhA94oAdMw", "https://www.youtube.com/embed/HG2z3fkVqpQ", "https://www.youtube.com/embed/KybYJ8Xk-HI", "https://www.youtube.com/embed/v-ywQLOfvMY", "https://www.youtube.com/embed/X9rKF_0lP18", "https://www.youtube.com/embed/Ksp9r-Qp0yQ", "https://www.youtube.com/embed/WutWcBLvgxQ", "https://www.youtube.com/embed/LsKI78uRH_g", "https://www.youtube.com/embed/Ab_Rdr0pfN0", "https://www.youtube.com/embed/KeULcS2T46A", "https://www.youtube.com/embed/FiJXTm14Ses", "https://www.youtube.com/embed/luin9bYgkks", "https://www.youtube.com/embed/oe8fvtPMUTw", "https://www.youtube.com/embed/gNItReTUaso", "https://www.youtube.com/embed/jcwpwZowHxo", "https://www.youtube.com/embed/WE-jKx8NnG8"]
-
+var round =0;
+var maxRound = 0;
 
 
 function printName() {
@@ -36,8 +37,9 @@ var gamesDays = 0;
 var dateOfMatch;
 var matchDates = [];
 var matchInfo = {};
+var furtherMathes = true;
 
-function getGames (chosenDate) {
+function getGames (round) {
   var apiUrl = 'https://api.squiggle.com.au/?q=games;year=2021;source=1;complete=0';
 
   fetch(apiUrl)
@@ -47,14 +49,17 @@ function getGames (chosenDate) {
           console.log(data);
             
            var l;
-            for(var i=0; i<20 ; i++){
+            for(var i=0; i< data.games.length ; i++){
                   dateOfMatch =  data.games[i].date.substring(0, 10);
                   if(! (matchDates.includes(dateOfMatch))){
                       matchDates.push(dateOfMatch);
                       matchInfo[dateOfMatch] = [i];
                   }
                   else{
-                      matchInfo[dateOfMatch].push(i);
+                      if(! (matchInfo[dateOfMatch].includes(i))){
+                        matchInfo[dateOfMatch].push(i);
+                      }
+                     
                   }
             }
             for (var j = 0; j< (matchDates.length-1); j++){
@@ -66,6 +71,9 @@ function getGames (chosenDate) {
                     }
                 }
             }
+
+            maxRound= (Math. trunc(matchDates.length / 5))  ;
+            maxRound = maxRound *5;
             var m1 = '<div id="myModal';
             var m2 = '"class="modal"><div class="modal-content"><div class="modal-header"><span class="close">×</span><h2>'
             var m3= '</h2></div><div class="modal-body"><p>'
@@ -74,20 +82,51 @@ function getGames (chosenDate) {
             
         //    document.getElementById("p2").style.color = "blue";
             // fetch first five days to display
+            var j;
+
+            fetchMatch:
             for(var i= 0; i< 5; i++){
-                document.querySelector("#day"+(i+1)).innerHTML = matchDates[i]+"<br>"+moment(matchDates[i]).format("dddd");
-                document.querySelector("#tickets").children[i+1].children[0].setAttribute('href','https://www.ticketmaster.com.au/browse/afl-catid-711/sports-rid-10004?datestart='+matchDates[i]);
+                j= i+round;
+                // check if dates are finished 
+                if(matchDates[j] === undefined){
+                    furtherMathes = false;
+                   
+                }
+         //       console.log(matchDates[j]+"  "+matchInfo[matchDates[j]]+ "   ");
+         //       console.log(matchInfo[j]);
+
+                
                 var matchesEl = document.querySelector("#matches").children[i+1];
                 var teamEl;
-                matchInfo[matchDates[i]].forEach(function(item,index){
-                    var modalFinal = m1+i+index+m2+ data.games[item].ateam+" V/S "+data.games[item].hteam+m3+"Venue: "+data.games[item].venue+"<br><br>Match Time: "+data.games[item].localtime+m4; 
-                    teamEl = document.createElement("p");
-                    teamEl.innerHTML = '<button class="myBtn"  background-color: transparent id="'+i+index+'">'+data.games[item].ateam+"<br> V/S <br>"+data.games[item].hteam+'</button>'+modalFinal+'<br><br>' ;
-                    matchesEl.append(teamEl);
-                })
+
+                //delete previous elements
+                while (matchesEl.firstChild) {
+                    matchesEl.removeChild(matchesEl.firstChild);
+                }
+
+                if(furtherMathes === true){
+                    document.querySelector("#day"+(i+1)).innerHTML = matchDates[j]+"<br>"+moment(matchDates[j]).format("dddd");
+                    document.querySelector("#tickets").children[i+1].children[0].setAttribute('href','https://www.ticketmaster.com.au/browse/afl-catid-711/sports-rid-10004?datestart='+matchDates[j]); 
+                    document.querySelector("#tickets").children[i+1].children[0].innerHTML = "Tickets";
+                    matchInfo[matchDates[j]].forEach(function(item,index){
+                        var modalFinal = m1+i+index+m2+ data.games[item].ateam+" V/S "+data.games[item].hteam+m3+"Venue: "+data.games[item].venue+"<br><br>Match Time: "+data.games[item].localtime+m4; 
+                        teamEl = document.createElement("p");
+                        teamEl.innerHTML = '<button class="myBtn"  background-color: transparent id="'+i+index+'">'+data.games[item].ateam+"<br> V/S <br>"+data.games[item].hteam+'</button>'+modalFinal+'<br><br>' ;
+                        matchesEl.append(teamEl);
+                       
+                    })
+                }
+                else{
+                    document.querySelector("#day"+(i+1)).innerHTML = "";
+                    document.querySelector("#tickets").children[i+1].children[0].setAttribute('href',''); 
+                    document.querySelector("#tickets").children[i+1].children[0].innerHTML = "";
+                }
+                
             }
+
+
             // display date at top of table
-            document.querySelector('#round').innerHTML = moment(matchDates[0]).format("D/M/YY") + " - " + moment(matchDates[4]).format("D/M/YY");
+            document.querySelector('#round').innerHTML = moment(matchDates[0+round]).format("D/M/YY") + " - " + moment(matchDates[4+round]).format("D/M/YY");
             
       //      document.querySelectorAll(".modal-header").style.color = "black";
         });
@@ -102,19 +141,24 @@ function getGames (chosenDate) {
 
 getGames(0);
 
-var x = 0
 function changeDate(direction){
     if (direction === 'right') {
-        var y = x + 5
-        x = y
-        getGames(y)
+        if(round< maxRound){
+            round = round+5;
+        getGames(round);
+        }
+        
+        
     }
     if (direction === 'left') {
-        var y = x - 5
-        x = y
-        getGames(y)
+        if(round >0){
+            round = round -5;
+            furtherMathes = true;
+            getGames(round);
+        }
     }
 }
+
 
 
 function modalFuntion(event){
