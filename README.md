@@ -25,4 +25,13 @@ AFL website with dynamic styling, containing features including:
 \
 <img src="./images/mainPage.png" alt="Signup Page">
 
+# Links
+
+Following is the link to the Weather-Dashboard application:  
+https://samgtr.github.io/AFLWebsite/
+
+Following is the link to the Github repository for Weather-Dashboard application:  
+https://github.com/SamGTR/AFLWebsite
+
+
 
