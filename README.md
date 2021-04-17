@@ -1,4 +1,5 @@
 # AFLWebsite
+This application is developed as Group Project-1 requirement.
 Website for accessing information regarding Australian Rules Football League.
 
 # Motivation
